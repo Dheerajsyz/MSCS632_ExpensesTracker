@@ -1,91 +1,162 @@
-# Expense Tracker Application Design Document
+# Expense Tracker Application
 
-**Group 5 – MSCS632: Advanced Programming Languages**  
-**Designed by:** Dheeraj Kollapaneni  
+**Developed by:** Suvendu Bista, Aman Shah, Dheeraj Kollapaneni, Nischal Pokhrel, Bhagavannarayana Bharadwaj Swayampakula
+
+**Course:** MSCS632 - A01 Advanced Programming Languages
+**Professor:** Vanessa Cooper
 **Date:** May 25, 2025
 
 ---
 
-## 1. Project Overview
+## Table of Contents
 
-The Expense Tracker Application is a CLI-based tool built in both **Python** and **C++** that enables users to add, view, filter, and summarize their expenses. This dual-language development approach is designed to illustrate key differences in programming language design such as **data types, memory management, naming, and binding**. This application also serves as a comparative study between the simplicity of Python’s high-level abstractions and C++’s performance-driven, statically typed structures.
+1. [Project Overview](#project-overview)
+2. [Functional Requirements](#functional-requirements)
+3. [Architecture and Components](#architecture-and-components)
+4. [Flowchart Diagram](#flowchart-diagram)
+5. [Class Diagram](#class-diagram)
 
----
+   * [Python](#python)
+   * [C++](#c)
+6. [User Interface Design (CLI)](#user-interface-design-cli)
+7. [Design Considerations](#design-considerations)
 
-![CleanShot 2025-05-25 at 21 57 31@2x](https://github.com/user-attachments/assets/a979448c-2bd7-481f-8af8-63e956927eaa)
-
-
-
-## 2. Functional Requirements
-
-- **Add Expense**: Includes date, amount, category, and description  
-- **View All Expenses**  
-- **Filter/Search Expenses**: By Date Range and/or Category  
-- **Summarize Expenses**: By Category and Total Amount  
-- **Unit Testing**: For Core Features (Python only)
-
----
-
-## 3. Architecture and Components
-
-| **Component**        | **Python Implementation**                  | **C++ Implementation**                   |
-|----------------------|--------------------------------------------|------------------------------------------|
-| Data Storage         | List of dictionaries                       | Vector of structs                         |
-| Expense Entry        | Dict keys: date, amount, category, desc    | Struct fields: date, amount, category, desc |
-| Filtering            | List comprehensions                        | For-loops with conditionals              |
-| Summarization        | Dict-based aggregation                    | Map for category totals                  |
-| Date Handling        | `datetime.strptime()`                      | Manual or `ctime` parsing                |
-| Persistence (optional) | JSON file                                | `fstream` or CSV output                  |
+   * [Python](#python-1)
+   * [C++](#c-1)
+8. [Collaboration Methodology](#collaboration-methodology)
+9. [Anticipated Challenges and Mitigation Strategies](#anticipated-challenges-and-mitigation-strategies)
+10. [Timeline and Task Assignments](#timeline-and-task-assignments)
+11. [Repository Link](#repository-link)
 
 ---
 
-## 4. User Interface Design (CLI)
+## Project Overview
 
-Users interact through a command-line interface with menu-driven prompts:
+The **Expense Tracker Application** is a command-line interface (CLI) tool developed in both **Python** and **C++**. It enables users to:
 
-1. Add Expense  
-2. View Expenses  
-3. Filter by Date or Category  
-4. Show Summary  
-5. Exit  
+* Add expenses (date, amount, category, description)
+* View all recorded expenses
+* Filter/search expenses by date range and/or category
+* Summarize expenses by category and total amounts
+* (Python only) Execute unit tests for core features
 
-Each option will call relevant functions to process user input and display results.
-
----
-
-## 5. Python Design Considerations
-
-- High-level and dynamically typed  
-- Uses built-in `list`, `dict`, and `datetime` modules  
-- Supports JSON I/O for persistence  
-- Unit tests created using standard `unittest` module  
+This dual-language implementation illustrates differences in language design, including data handling, memory management, and abstraction levels, providing a comparative study of Python’s high-level features versus C++’s performance-driven, statically-typed structures.
 
 ---
 
-## 6. C++ Design Considerations
+## Functional Requirements
 
-- Uses `structs` for static typing and strong memory control  
-- STL containers such as `vector`, `map`, and `string`  
-- File I/O handled with `fstream`  
-- Date handled manually or with `std::chrono` if needed  
-
----
-
-## 7. Anticipated Challenges and Mitigation Strategies
-
-- **Python**: Date parsing and lack of static type safety – mitigated via input validation.  
-- **C++**: Verbose syntax and memory control issues – mitigated by STL use and scoped constructs.  
-- **Testing**: Python includes unit tests; C++ will require manual validation or use of assertions.  
+* **Add Expense**: Capture date, amount, category, description.
+* **View Expenses**: Display all saved expenses.
+* **Filter/Search**: Filter by date range and/or category.
+* **Summarize**: Aggregate totals by category and overall sum.
+* **Unit Testing**: (Python only) Validate core functionalities via tests.
 
 ---
 
-## 8. Timeline and Task Assignments
+## Architecture and Components
 
-| **Task**               | **Deadline** | **Assigned To**            |
-|------------------------|--------------|-----------------------------|
-| Design Finalization    | May 25       | Dheeraj Kollapaneni         |
-| Python Implementation  | May 28       | Bhargava B. Bharadwaj       |
-| C++ Implementation     | May 28       | Aman Shah                   |
-| Documentation          | May 30       | Nischal Pokharel            |
-| Presentation           | May 30       | Suvendu Bista               |
-| Final Review & Submission | May 31    | Entire Team                 |
+| Component               | Python Implementation                                   | C++ Implementation                                                                                   |
+| ----------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Data Storage            | List of dictionaries                                    | `std::vector` of structs                                                                             |
+| Expense Entry Structure | Dict keys (`date`, `amount`, `category`, `description`) | `struct Expense { std::string date; double amount; std::string category; std::string description; }` |
+| Filtering               | List comprehensions                                     | `for` loops with conditionals                                                                        |
+| Summarization           | Dict-based aggregation                                  | `std::map` for category totals                                                                       |
+| Date Handling           | `datetime.strptime()`                                   | Manual parsing or `std::chrono`                                                                      |
+| Persistence (optional)  | JSON file via `json` module                             | File I/O with `std::fstream` or CSV                                                                  |
+
+---
+
+## Flowchart Diagram
+
+![image](https://github.com/user-attachments/assets/7aecb425-c86a-473e-b75e-bd3d5d383bd5)
+
+
+*Figure: Expense Tracker Application flowchart.*
+
+---
+
+## Class Diagram
+
+### Python
+
+
+![image](https://github.com/user-attachments/assets/706e603f-518f-4c32-a8c7-0c6bcb34a67d)
+
+
+*Figure: Python class diagram illustrating data structures and module relationships.*
+
+### C++
+
+![image](https://github.com/user-attachments/assets/a8ff6079-2640-49c3-872f-e32f900eca1b)
+
+
+*Figure: C++ class diagram showing structs and STL container usage.*
+
+---
+
+## User Interface Design (CLI)
+
+Users interact through a menu-driven CLI:
+
+```
+1. Add Expense
+2. View Expenses
+3. Filter by Date or Category
+4. Show Summary
+5. Exit
+```
+
+Each selection invokes the corresponding function to process input and display results.
+
+---
+
+## Design Considerations
+
+### Python
+
+* High-level, dynamically typed language
+* Utilizes built-in `list`, `dict`, and `datetime` modules
+* JSON I/O for persistence
+* Unit tests implemented with `unittest`
+
+### C++
+
+* Static typing with `struct` for expense entries
+* Uses STL containers (`std::vector`, `std::map`, `std::string`)
+* File I/O via `std::fstream`
+* Manual date handling or `std::chrono`
+
+---
+
+## Collaboration Methodology
+
+* **Version Control:** GitHub repository
+* **Communication:** Microsoft Teams, Email
+
+---
+
+## Anticipated Challenges and Mitigation Strategies
+
+* **Python**: Date parsing errors & lack of static type safety → Mitigated through input validation.
+* **C++**: Verbose syntax & memory management → Mitigated via STL usage and scoped constructs.
+* **Testing**: Python unit tests; C++ validation through assertions or manual testing.
+
+---
+
+## Timeline and Task Assignments
+
+| Task                      | Deadline   | Assigned To           |
+| ------------------------- | ---------- | --------------------- |
+| Design Finalization       | 2025-05-25 | Dheeraj Kollapaneni   |
+| Python Implementation     | 2025-06-08 | Bhargava B. Bharadwaj |
+| C++ Implementation        | 2025-06-08 | Aman Shah             |
+| Documentation             | 2025-06-22 | Nischal Pokhrel       |
+| Presentation              | 2025-06-22 | Suvendu Bista         |
+| Final Review & Submission | 2025-06-22 | Entire Team           |
+
+---
+
+## Repository Link
+
+[View the GitHub Repository](https://github.com/Dheerajsyz/MSCS632_Group-Project)
