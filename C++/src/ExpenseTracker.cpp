@@ -6,7 +6,7 @@
 #include <ctime>
 #include <sstream>
 #include <limits>
-#include <memory>  
+#include <memory>
 
 using namespace std;
 /*
