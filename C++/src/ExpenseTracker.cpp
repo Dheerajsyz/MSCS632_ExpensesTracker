@@ -6,6 +6,7 @@
 #include <ctime>
 #include <sstream>
 #include <limits>
+#include <memory>  
 
 using namespace std;
 /*
@@ -287,11 +288,14 @@ void displaySummary(const ExpenseTracker::Summary& summary) {
               << right << setw(10) << "Amount" << " |\n";
     cout << string(37, '-') << "\n";
 
-    for (const auto& [category, amount] : summary.categories) {
+    for (const auto& pair : summary.categories) {
+        const auto& category = pair.first;
+        const auto& amount = pair.second;
         cout << "| " << left << setw(20) << category << " | "
-                  << right << setw(5) << fixed << setprecision(2)
-                  << "$" << amount << " |\n";
-    }
+             << right << setw(5) << fixed << setprecision(2)
+             << "$" << amount << " |\n";
+}
+
     cout << string(37, '-') << "\n";
     cout << "| " << left << setw(20) << "TOTAL" << " | "
               << right << setw(5) << "$" << summary.total << " |\n";
